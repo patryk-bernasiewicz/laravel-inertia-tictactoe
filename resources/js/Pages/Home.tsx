@@ -3,11 +3,14 @@ import React from 'react';
 const Home = () => {
   const foo: string = 'React';
   const bar: string = 'TypeScript';
+  const baz: string = 'Tailwind';
 
   return (
-    <h1>
-      Hello {foo} + {bar}!!!
-    </h1>
+    <div className="mx-auto py-4 max-w-[1200px]">
+      <h1 className="text-2xl font-bold">
+        Hello {foo} + {bar} + {baz}!
+      </h1>
+    </div>
   );
 };
 
