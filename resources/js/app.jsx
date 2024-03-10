@@ -4,14 +4,17 @@ import { createInertiaApp } from '@inertiajs/inertia-react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
 createInertiaApp({
-    resolve: (name) => {
-        return resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx'));
-    },
-    setup({ el, App, props }) {
-        createRoot(el).render(
-            <StrictMode>
-                <App {...props} />
-            </StrictMode>
-        );
-    },
+  resolve: (name) => {
+    return resolvePageComponent(
+      `./Pages/${name}.tsx`,
+      import.meta.glob('./Pages/**/*.tsx')
+    );
+  },
+  setup({ el, App, props }) {
+    createRoot(el).render(
+      <StrictMode>
+        <App {...props} />
+      </StrictMode>
+    );
+  },
 });
