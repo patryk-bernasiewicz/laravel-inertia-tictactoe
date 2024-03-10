@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 
 const Home = () => (
   <div className="mx-auto grid h-full max-w-[1200px] items-center justify-center py-4">

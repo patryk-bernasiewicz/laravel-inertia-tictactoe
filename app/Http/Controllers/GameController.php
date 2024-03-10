@@ -63,7 +63,7 @@ class GameController extends Controller
         $state[$cell] = $this->playerSymbol;
 
         $oppositeMoveCell = $this->gameService->getBestMove($state, $this->computerSymbol);
-        if ($oppositeMoveCell) {
+        if (!empty($oppositeMoveCell)) {
             $state[$oppositeMoveCell] = $this->computerSymbol;
         }
 
