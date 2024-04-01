@@ -1,0 +1,33 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.10'
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Build assets with Vite
+        run: npm run build
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Deploy to server
+        run: |
+          rsync -av -e 'ssh -p 11680' --delete --exclude='.git*' --exclude='.github*' ./ frog@frog01.mikr.us:/var/www/tic-tac-toe
+          ssh frog@frog01.mikr.us -p 11680 "cd /var/www/tic-tac-toe && composer install --no-dev && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache"
