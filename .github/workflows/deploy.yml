@@ -22,6 +22,10 @@ jobs:
       - name: Build assets with Vite
         run: npm run build
 
+      - name: Add SSH key to known_hosts
+        run: |
+          ssh-keyscan -p 11680 frog01.mikr.us >> ~/.ssh/known_hosts
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
